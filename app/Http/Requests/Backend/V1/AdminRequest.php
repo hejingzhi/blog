@@ -10,7 +10,7 @@ class AdminRequest extends BaseRequest{
     public function rules()
     {
      
-        $add = [
+        $create = [
             'username' => ['bail', 'required', 'max:20', 'unique:admin,username'],
             'name' => ['bail', 'required', 'max:20'],
             'password' => ['bail', 'required', passwordRegex()],
@@ -21,7 +21,7 @@ class AdminRequest extends BaseRequest{
             'gender' => ['bail', 'required', Rule::in([0, 1])],
         ];
         $rules = [
-            'add' => $add,
+            'create' => $create,
         ];
         $actionMethod = $this->route()->getActionMethod();
      
