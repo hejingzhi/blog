@@ -19,5 +19,16 @@ class AdminService extends BaseService
     {
         return $this->repository->create($record);
     }
-
+    public function update(array $record,int $id)
+    {
+        return $this->repository->update($record,$id);
+    }
+    public function delete(int $id)
+    {
+        return $this->repository->delete($id);
+    }
+    public function detail(int $id)
+    {
+        return $this->repository->findOne($id);
+    }
 }

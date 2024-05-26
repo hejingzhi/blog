@@ -6,6 +6,7 @@ use App\Http\Services\Backend\V1\AdminService;
 use App\Http\Controllers\Controller;
  class AdminConreoller extends Controller
 {
+    
     public function __construct(AdminService $aminService)
     {
         $this->service = $aminService;
@@ -15,4 +16,28 @@ use App\Http\Controllers\Controller;
         $result = $this->service->create($request->validated());
         return $result ? apiSuccessData($result) : apiFailureData();    
     }
+
+    public function update(AdminRequest $request)
+    {
+        $data = $request->validated();
+        $result = $this->service->update($data,$data['admin_id']);
+        return $result ? apiSuccessData() : apiFailureData();
+    }
+    public function delete(AdminRequest $request)
+    {
+        $data = $request->validated();
+        $result = $this->service->delete($data['admin_id']);
+        return $result ? apiSuccessData() : apiFailureData();
+    }
+    public function detail(AdminRequest $request)
+    {
+        $data = $request->validated();
+        $result = $this->service->detail($data['admin_id']);
+        return $result ? apiSuccessData($result) : apiFailureData();
+    }
+    public function list(AdminRequest $request)
+    {
+       
+    }
+
 }

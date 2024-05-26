@@ -112,11 +112,18 @@ class BaseRepository
         }
 
         $model = $this->model->newQuery();
-
         if ($idOrCondition instanceof Closure) {
-            return $model->where($idOrCondition)->delete();
+            $result =  $model->where($idOrCondition)->get();
         } else {
-            return $model->find($idOrCondition)->delete();
+            $result =  $model->withTrashed()->find($idOrCondition);
+            //是否已经删除过了
+        }
+        if($result && $result->trashed()){
+            //已经删除过了
+            return false;
+        }else{
+            //删除
+            return $result->delete();
         }
     }
 

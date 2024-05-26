@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class BaseModel extends Model
 {
-    use LogsActivity;
+    use LogsActivity,SoftDeletes;
     protected $dateFormat = 'Y-m-d H:i:s.u';
 
     public function getPrimaryKey(): string

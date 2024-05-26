@@ -21,9 +21,9 @@ class Admin extends BaseModel
 
     protected $fillable = ['name', 'username', 'password', 'phone', 'gender', 'status', 'picture','email'];
 
-    protected $hidden = ['updated_at'];
+    protected $hidden = ['updated_at','deleted_at'];
 
-
+    protected $dates = ['delete_at'];
     public function setphoneAttribute($value)
     {
         $this->attributes['phone'] = encryptPhone($value);
