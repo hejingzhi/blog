@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
     {
         $this->service = $aminService;
     }
-    public function add(AdminRequest $request)
+    public function create(AdminRequest $request)
     {
-        $result = $this->service->add($request->validated());
+        $result = $this->service->create($request->validated());
         return $result ? apiSuccessData($result) : apiFailureData();    
     }
 }

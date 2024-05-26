@@ -4,6 +4,7 @@ namespace App\Models\Backend\V1;
 
 use App\Models\BaseModel;
 
+
 class Admin extends BaseModel
 {
     public $timestamps = true;
@@ -32,4 +33,5 @@ class Admin extends BaseModel
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
 }

@@ -38,7 +38,7 @@ class BaseRepository
      *　　　┗┻┛　┗┻┛
      *
      */
-    public function add(array $record)
+    public function create(array $record)
     {
         return $this->model->newQuery()->create($record);
     }
@@ -67,7 +67,7 @@ class BaseRepository
      *　　　┗┻┛　┗┻┛
      *
      */
-    public function edit(array $record, $idOrCondition)
+    public function update(array $record, $idOrCondition)
     {
         if (!checkIdOrCondition($idOrCondition)) {
             return false;

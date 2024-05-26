@@ -15,9 +15,9 @@ class AdminService extends BaseService
     
     }
 
-    public function add(array $record)
+    public function create(array $record)
     {
-        return $this->repository->add($record);
+        return $this->repository->create($record);
     }
 
 }

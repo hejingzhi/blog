@@ -5,9 +5,11 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 class BaseModel extends Model
 {
+    use LogsActivity;
     protected $dateFormat = 'Y-m-d H:i:s.u';
 
     public function getPrimaryKey(): string
@@ -38,5 +40,12 @@ class BaseModel extends Model
         }
 
         return $query;
+    }
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName($this->table)
+            ->logFillable()
+            ->logUnguarded();
     }
 }
