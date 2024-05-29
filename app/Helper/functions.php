@@ -1,4 +1,7 @@
 <?php
+use \Illuminate\Support\Facades\Cache;
+use \Illuminate\Http\Exceptions\HttpResponseException;
+
 /**
  * 返回成功后的数据
  *
@@ -272,3 +275,35 @@ function decryptData(string $data, string $key)
 
     return base64_decode($str);
 }
+/**
+ * 关键词处理
+ *
+ * @param string|null $keyword
+ * @return string
+ */
+function trimKeyword(?string $keyword)
+{
+    $keyword = urldecode($keyword);
+    $keyword = trim($keyword);
+    $keyword = preg_replace('/%|insert|update|select|delete|create|join|union|where|like|drop|modify|rename|alter/i', '', $keyword);
+
+    return $keyword;
+}
+/**
+ * 为返回列表获取配置信息
+ *
+ * @param string $field
+ * @param string $key
+ * @return array
+ * @throws Exception
+ */
+
+ //conf('admin_gender', 'common_gender')
+ function conf(string $key)
+ {
+    if(!Cache::has($key)){
+        throw new HttpResponseException(response(apiFailureData('请联系开发人员添加配置：' . $key)));
+    }
+    $conf = Cache::get($key)[$key];
+     return [$key => $conf];
+ }

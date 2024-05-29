@@ -18,12 +18,13 @@ class Admin extends BaseModel
     public $incrementing = true;
 
     protected $perPage = 15;
+    
+    protected $fillable = ['admin_name', 'admin_username', 'admin_password', 'admin_phone', 'admin_gender', 'admin_status', 'admin_picture','admin_email'];
 
-    protected $fillable = ['name', 'username', 'password', 'phone', 'gender', 'status', 'picture','email'];
+    protected $visible = ['admin_id','admin_name', 'admin_username', 'admin_password', 'admin_phone', 'admin_gender', 'admin_status', 'admin_picture','admin_email', 'created_at','updated_at'];
 
-    protected $hidden = ['updated_at','deleted_at'];
+    protected $hidden = ['deleted_at'];
 
-    protected $dates = ['delete_at'];
     public function setphoneAttribute($value)
     {
         $this->attributes['phone'] = encryptPhone($value);

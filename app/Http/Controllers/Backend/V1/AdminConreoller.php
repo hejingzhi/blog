@@ -6,7 +6,6 @@ use App\Http\Services\Backend\V1\AdminService;
 use App\Http\Controllers\Controller;
  class AdminConreoller extends Controller
 {
-    
     public function __construct(AdminService $aminService)
     {
         $this->service = $aminService;
@@ -37,7 +36,16 @@ use App\Http\Controllers\Controller;
     }
     public function list(AdminRequest $request)
     {
-       
+        $keyword = $request->input('keyword') ?? '';
+        $page = $request->input('page') ?? 1;
+        $pageSize = $request->input('pageSize') ?? PAGESIZE;
+        $order = $request->input('orderType') ?? 'desc';
+        $field = $request->input('fieldName') ?? 'admin_id';
+        $list = $this->service->findAll($keyword, [$field => $order], ['*'], true, $page, $pageSize);
+        $total = $this->service->count($keyword);
+        $data = ['data' => $list, 'total' => $total];
+        $data['conf'] = conf('admin_gender')+ conf( 'admin_status');
+        return apiSuccessData($data);
     }
 
 }

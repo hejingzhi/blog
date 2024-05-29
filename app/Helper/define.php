@@ -1,2 +1,3 @@
 <?php
-    define('TEST', 1);
+    define('PAGESIZE', 15);
+    define('MAXPAGESIZE', 500);
