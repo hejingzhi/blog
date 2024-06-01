@@ -12,9 +12,9 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
-
+    //默认使用后端认证
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
+        'guard' => env('AUTH_GUARD', 'backend'),
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
@@ -40,6 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        //后端认证
+        'backend' => [
+            'driver' => 'jwt',
+            'provider' => 'admin',
+        ],
+        //前端认证
+        'frontend' => [
+            'driver' => 'jwt',
+            'provider' => 'user',
+        ],
     ],
 
     /*
@@ -60,15 +70,20 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
-
         // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'driver' => 'eloquent',
+        //     'model' => env('AUTH_MODEL', App\Models\User::class),
         // ],
+        //后端认证数据模块
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\Backend\V1\Admin::class),
+        ],
+        //前端认证数据模块
+        'user' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\Frontend\V1\User::class),
+        ],
     ],
 
     /*

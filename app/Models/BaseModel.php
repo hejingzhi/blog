@@ -49,4 +49,5 @@ class BaseModel extends Model
             ->logFillable()
             ->logUnguarded();
     }
+
 }
